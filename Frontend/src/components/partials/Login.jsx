@@ -13,11 +13,9 @@ function Login() {
   const navigate = useNavigate();
   const { user, setuser } = useAuthContext();
   const userLogin = async (data) => {
-    console.log(data);
     await axios
-      .post("http://localhost:880/user/login", data)
+      .post("https://book-store-nftq.onrender.com/user/login", data)
       .then((res) => {
-        console.log(res.data);
         if (res.data) {
           setuser(res.data.user);
           toast.success("Login successfully");
@@ -32,8 +30,8 @@ function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-screen ">
-      <div className="modal-box bg-white">
+    <div className="flex justify-center  items-center bg-[#B2C9AD] w-full h-screen overflow-hidden ">
+      <div className="modal-box overflow-hidden  text-pink-500 bg-[#D3F1DF] ">
         <form
           onSubmit={handleSubmit(userLogin)}
           method="dialog"
@@ -59,7 +57,8 @@ function Login() {
                 </span>
               )}
             </h2>
-            <label className=" bg-white input input-bordered flex items-center gap-2">
+           
+            <label className="  bg-white border-2 input input-bordered overflow-hidden flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -71,7 +70,7 @@ function Login() {
               </svg>
               <input
                 type="email"
-                className="grow"
+                className="grow text-sm   w-60 px-2"
                 placeholder="Email"
                 {...register("email", { required: true })}
               />
@@ -86,7 +85,7 @@ function Login() {
                 </span>
               )}
             </h2>
-            <label className=" bg-white input input-bordered flex items-center gap-2">
+            <label className=" bg-white border-2 input input-bordered flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -102,7 +101,7 @@ function Login() {
               <input
                 type="password"
                 placeholder="............."
-                className="grow "
+                className="grow text-sm w-56 "
                 {...register("password", {
                   required: true,
                   minLength: {

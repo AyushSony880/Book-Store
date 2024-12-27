@@ -9,34 +9,6 @@ import Login from "./components/partials/Login";
 import { useAuthContext } from "./context/AuthContext";
 
 function App() {
-  // Function to detect the device type
-  function detectDevice() {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-    // Check for Android devices
-    if (/android/i.test(userAgent)) {
-      return "Android";
-    }
-
-    // Check for iOS devices (iPhone, iPad, iPod)
-    if (/iPhone|iPad|iPod/i.test(userAgent)) {
-      return "iOS";
-    }
-
-    // Check for Windows Phone devices
-    if (/windows phone/i.test(userAgent)) {
-      return "Windows Phone";
-    }
-
-    // If no mobile device is detected, assume desktop
-    return "Desktop";
-  }
-
-  // Get the detected device type
-  const deviceType = detectDevice();
-
-  // Display the result in the console and on the webpage
-  console.log("User is visiting from:", deviceType);
   const { theme, user } = useAuthContext();
   const navigate = useNavigate();
 

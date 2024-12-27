@@ -4,13 +4,15 @@ import Footer from "./partials/Footer";
 import Cards from "./partials/Cards";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import PropagateLoader from "react-spinners/PropagateLoader";
 function Courses() {
   const [paidbook, setpaidbook] = useState([]);
   useEffect(() => {
     try {
       const getBook = async () => {
-        const { data } = await axios.get("http://localhost:880/book");
-        console.log(data);
+        const { data } = await axios.get(
+          "https://book-store-nftq.onrender.com/book"
+        );
         const val = data.filter((item) => item.category === "paid");
         setpaidbook(val);
       };
@@ -24,33 +26,35 @@ function Courses() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen mt-28 md:mt-40 flex flex-col items-center w-full    md:px-10">
-        <div className="flex flex-col items-center gap-7 px-3">
-          <h1 className=" text-2xl md:text-4xl font-extrabold leading-relaxed ">
-            We're delightted to have{" "}
-            <span className="text-pink-500 ">you Here! :)</span>
-          </h1>
-          <p className="text-center md:mt-10">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
-            nobis totam libero ea dolorum accusamus natus laboriosam. Odit
-            facere labore facilis suscipit perspiciatis, deserunt, quidem nobis
-            ad, atque voluptate tenetur libero at vel sint omnis expedita enim
-            blanditiis quibusdam officiis. Sequi voluptatum dicta, nihil libero
-            debitis delectus reiciendis tempora necessitatibus itaque.
-            Asperiores aliquam iure,{" "}
-          </p>
-          <Link to="/" className="px-5 rounded-xl py-2 bg-pink-500">
-            Back
-          </Link>
+      {paidbook.length !== 0 ? (
+        <div className="min-h-screen mt-28 md:mt-40 flex flex-col items-center w-full    md:px-10">
+          <div className="flex flex-col items-center gap-7 px-3">
+            <h1 className=" text-2xl md:text-4xl font-extrabold leading-relaxed ">
+              We're delightted to have{" "}
+              <span className="text-pink-500 ">you Here! :)</span>
+            </h1>
+            <p className="text-center md:mt-10">
+              Reading books enriches the mind and soul, offering knowledge,
+              inspiration, and escape. It sparks creativity, enhances focus, and
+              builds empathy by exploring diverse perspectives. Books are
+              timeless companions, fueling growth, imagination, and wisdom. At
+              01BookStoreApp, we celebrate the joy of reading, connecting you
+              with stories that transform and inspire.
+            </p>
+            <Link to="/" className="px-5 rounded-xl py-2 bg-pink-500">
+              Back
+            </Link>
+          </div>
+          <div className="flex w-full flex-wrap justify-evenly items-center py-10 gap-x-5 gap-y-10 mt-20">
+            {paidbook.length !== 0 &&
+              paidbook.map((item) => <Cards data={item} key={item.id} />)}
+          </div>
         </div>
-        <div className="flex w-full flex-wrap justify-evenly items-center gap-x-5 gap-y-10 mt-20">
-          {paidbook ? (
-            paidbook.map((item) => <Cards data={item} key={item.id} />)
-          ) : (
-            <h1>loading....</h1>
-          )}
+      ) : (
+          <div className="w-full h-svh flex items-center justify-center">
+            <PropagateLoader color="#e90ce8" />
         </div>
-      </div>
+      )}
       <Footer />
     </>
   );

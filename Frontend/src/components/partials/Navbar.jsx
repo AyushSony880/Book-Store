@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 
 function Navbar() {
   const { theme, settheme, user, setuser } = useAuthContext();
-  // console.log(theme);
 
   const handleTheme = () => {
     settheme((prev) => !prev);
@@ -34,7 +33,7 @@ function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content  rounded-box z-[10] mt-3 w-24 bg-white p-2 shadow">
+              className="menu menu-sm dropdown-content text-black rounded-box z-[10] mt-3 w-24 bg-white p-2 shadow">
               <li>
                 <Link to="/"> Home</Link>
               </li>
@@ -68,7 +67,7 @@ function Navbar() {
               </li>
             </ul>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden  md:block">
             <label className=" flex items-center border border-gray-300 px-3 py-2 rounded-lg  gap-2">
               <input
                 type="text"

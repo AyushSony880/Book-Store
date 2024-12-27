@@ -15,11 +15,9 @@ function Signup() {
   const navigate = useNavigate();
   const { user, setuser } = useAuthContext();
   const userInfo = async (data) => {
-    console.log(data);
     await axios
-      .post("http://localhost:880/user/signup", data)
+      .post("https://book-store-nftq.onrender.com/user/signup", data)
       .then((res) => {
-        console.log(res.data.user);
         if (res.data) {
           setuser(res.data.user);
           toast.success("Signup successfully");
@@ -32,15 +30,14 @@ function Signup() {
       });
   };
 
-  console.log(user);
 
   return (
-    <div className="flex justify-center items-center w-full h-screen ">
-      <div className="modal-box bg-white">
+    <div className="flex justify-center  items-center bg-[#B2C9AD] text-pink-500 w-full h-screen overflow-hidden ">
+      <div className="modal-box w-full bg-[#D3F1DF]  overflow-hidden">
         <form
           onSubmit={handleSubmit(userInfo)}
           method="dialog"
-          className=" space-y-7"
+          className="w-[95%] space-y-7 overflow-hidden"
         >
           {/* if there is a button in form, it will close the modal */}
           <Link
@@ -56,12 +53,12 @@ function Signup() {
             <h2>
               User Name
               {errors.name && (
-                <span className=" px-3 inline-block text-xs text-red-500">
+                <span className=" px-3 inline text-xs text-red-500">
                   (required...)
                 </span>
               )}
             </h2>
-            <label className=" bg-white input input-bordered flex items-center gap-2">
+            <label className=" bg-white input border-2 input-bordered flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -72,7 +69,7 @@ function Signup() {
               </svg>
               <input
                 type="text"
-                className="grow"
+                className="grow text-sm   w-60 px-2"
                 placeholder="Username"
                 {...register("name", { required: true })}
               />
@@ -82,12 +79,12 @@ function Signup() {
             <h2>
               Email
               {errors.email && (
-                <span className=" px-3 inline-block text-xs text-red-500">
+                <span className=" px-3 inline-block text-wrap break-words text-xs text-red-500">
                   (required...)
                 </span>
               )}
             </h2>
-            <label className=" bg-white input input-bordered flex items-center gap-2">
+            <label className=" bg-white input border-2 input-bordered overflow-hidden flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -99,7 +96,7 @@ function Signup() {
               </svg>
               <input
                 type="email"
-                className="grow"
+                className="grow text-sm   w-60 px-3"
                 placeholder="Email"
                 {...register("email", { required: true })}
               />
@@ -109,12 +106,12 @@ function Signup() {
             <h2>
               Password
               {errors.password && (
-                <span className=" px-3 inline-block text-xs text-red-500">
+                <span className=" px-3 w-[80%] inline text-xs text-red-500">
                   (Password must be at least 8 characters long)
                 </span>
               )}
             </h2>
-            <label className=" bg-white input input-bordered flex items-center gap-2">
+            <label className=" bg-white input border-2 input-bordered flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -130,7 +127,7 @@ function Signup() {
               <input
                 type="password"
                 placeholder="............."
-                className="grow "
+                className="grow text-sm   w-60 px-2 "
                 {...register("password", {
                   required: true,
                   minLength: {

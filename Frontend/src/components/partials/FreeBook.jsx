@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import Cards from "./Cards";
 import axios from "axios";
 import { useAuthContext } from "../../context/AuthContext";
+import PropagateLoader from "react-spinners/PropagateLoader";
 function FreeBook() {
   const [freebook, setfreebook] = useState([]);
   const { theme } = useAuthContext;
@@ -12,13 +13,13 @@ function FreeBook() {
   useEffect(() => {
     try {
       const getBook = async () => {
-        const { data } = await axios.get("http://localhost:880/book");
-        console.log(data);
+        const { data } = await axios.get(
+          "https://book-store-nftq.onrender.com/book"
+        );
         const val = data.filter((item) => item.category === "free");
         setfreebook(val);
       };
       getBook();
-      
     } catch (error) {
       console.log(error);
     }
@@ -77,11 +78,15 @@ function FreeBook() {
           non suscipit, iure neque earum?
         </p>
       </div>
-      <div className="mt-10">
-        <Slider {...settings} >
-          {freebook.map((data) => (
-            <Cards data={data} key={data.id} />
-          ))}
+      <div className="mt-10 ">
+        <Slider {...settings}>
+          {freebook.length !== 0 ? (
+            freebook.map((data) => <Cards data={data} key={data.id} />)
+          ) : (
+            <div className="w-full h-svh bg-slate-600 flex items-center justify-center">
+              <PropagateLoader color="#e90ce8" />
+            </div>
+          )}
         </Slider>
       </div>
     </div>
